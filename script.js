@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (penalty >= 0.4) {
             riskChartEl.classList.add('red');
-            riskLabel = "KRITIK XAVF";
+            riskLabel = "KRITIK HOLAT";
             strokeDash = 85;
         } else if (penalty >= 0.2) {
             riskChartEl.classList.add('yellow');
