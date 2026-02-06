@@ -220,10 +220,24 @@ body {
 
     .results-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .result-item .value {
         font-size: 1.8rem;
+    }
+
+    .budget-values {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .budget-box h5 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 1.2rem;
     }
 }
 
