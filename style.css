@@ -358,6 +358,15 @@ input {
     font-family: var(--font-body);
     outline: none;
     transition: all 0.3s ease;
+    -moz-appearance: textfield;
+    /* Firefox */
+}
+
+/* Remove number input spinners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input::placeholder {
