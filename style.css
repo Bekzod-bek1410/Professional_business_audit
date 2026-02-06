@@ -109,7 +109,8 @@ body {
 }
 
 .main-header h1 {
-    font-size: 4rem;
+    font-size: clamp(2.2rem, 8vw, 4rem);
+    /* Dynamic resizing between 2.2rem and 4rem */
     font-weight: 800;
     text-transform: uppercase;
     line-height: 1.1;
@@ -127,7 +128,7 @@ body {
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
     color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto;
@@ -174,6 +175,16 @@ body {
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .main-header h1 {
+        letter-spacing: -1px;
+    }
+}
+
 @media (max-width: 1024px) {
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -190,6 +201,10 @@ body {
     .recommendations {
         grid-column: span 2;
     }
+
+    .main-header h1 {
+        font-size: 3rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -199,7 +214,16 @@ body {
     }
 
     .main-header h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-item .value {
+        font-size: 1.8rem;
     }
 }
 
@@ -210,7 +234,7 @@ body {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 1.5rem;
+    padding: clamp(1rem, 4vw, 1.5rem);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -229,6 +253,7 @@ body {
     padding: 1px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
@@ -505,6 +530,23 @@ input:not(:placeholder-shown) {
     margin-bottom: 1.5rem;
 }
 
+.risk-chart-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+}
+
+.risk-label-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+    pointer-events: none;
+}
+
 .circular-chart {
     max-width: 80%;
     max-height: 140px;
@@ -539,12 +581,15 @@ input:not(:placeholder-shown) {
 }
 
 .percentage {
-    fill: #fff;
-    font-family: 'Inter', sans-serif;
+    color: #fff;
+    font-size: 0.9rem;
     font-weight: 800;
-    font-size: 0.55rem;
     text-transform: uppercase;
-    text-anchor: middle;
+    display: block;
+    line-height: 1.1;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    word-wrap: break-word;
+    /* handle long words if any */
 }
 
 /* Warnings */
