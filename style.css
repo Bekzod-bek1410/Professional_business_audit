@@ -616,14 +616,16 @@ input:not(:placeholder-shown) {
 
 .percentage {
     color: #fff;
-    font-size: clamp(0.6rem, 2.5vw, 0.65rem);
-    /* Even smaller to be safe */
+    font-size: clamp(0.85rem, 3vw, 1.1rem);
+    /* Larger font size as requested */
     font-weight: 800;
     text-transform: uppercase;
     display: block;
     line-height: 1.1;
     text-shadow: 0 0 15px rgba(0, 0, 0, 1);
     word-wrap: break-word;
+    white-space: pre-line;
+    /* Allows handling of newlines or forced breaks */
 }
 
 /* Warnings */

@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (penalty >= 0.4) {
             riskChartEl.classList.add('red');
-            riskLabel = "KRITIK HOLAT";
+            riskLabel = "KRITIK<br>HOLAT";
             strokeDash = 85;
         } else if (penalty >= 0.2) {
             riskChartEl.classList.add('yellow');
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             strokeDash = 100; // Full circle
         }
 
-        riskTextEl.textContent = riskLabel;
+        riskTextEl.innerHTML = riskLabel;
         // Simple animation for the stroke
         const circle = riskChartEl.querySelector('.circle');
         circle.setAttribute('stroke-dasharray', `${strokeDash}, 100`);
