@@ -4,203 +4,147 @@ document.addEventListener('DOMContentLoaded', () => {
     const avgCheckInput = document.getElementById('avgCheck');
     const convRateInput = document.getElementById('convRate');
 
-    // Toggles
-    const crmYes = document.getElementById('crm-yes');
-    const crmNo = document.getElementById('crm-no');
-    const salesYes = document.getElementById('sales-yes');
-    const salesNo = document.getElementById('sales-no');
-    const smmYes = document.getElementById('smm-yes');
-    const smmNo = document.getElementById('smm-no');
+    // Radios (using querySelector for groups)
+    const radios = document.querySelectorAll('input[type="radio"]');
 
     // Outputs
     const clientsNeedEl = document.getElementById('clientsNeeded');
     const leadsNeedEl = document.getElementById('leadsNeeded');
     const minBudgetEl = document.getElementById('minBudget');
     const optBudgetEl = document.getElementById('optBudget');
-    const budgetPenaltyEl = document.getElementById('budgetPenalty');
-    const warningListEl = document.getElementById('warningList');
-    const recommendationsListEl = document.getElementById('recommendationsList');
-    const riskChartEl = document.getElementById('riskChart');
-    const riskTextEl = document.querySelector('.risk-meter .percentage');
 
-    // Icon Status
-    const iconCrm = document.getElementById('icon-crm');
-    const iconSales = document.getElementById('icon-sales');
-    const iconSmm = document.getElementById('icon-smm');
+    // Risk Elements
+    const riskLabel = document.getElementById('riskLabel');
+    const riskCircle = document.querySelector('.circular-chart .circle');
+
+    // Alert & Recommendations
+    const impactAlert = document.getElementById('impactAlert');
+    const impactText = document.getElementById('impactText');
+    const recommendationsList = document.getElementById('recommendationsList');
 
     // Constants
-    const CPL_MIN = 0.8; // $
-    const CPL_MAX = 1.5; // $
+    const CPL_MIN = 0.8;
+    const CPL_MAX = 1.5;
+
+    function getRadioValue(name) {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.value : null;
+    }
 
     function calculate() {
-        // Get Values
-        let incomeStr = incomeInput.value;
-        let avgCheckStr = avgCheckInput.value;
-        let convRateStr = convRateInput.value;
+        const income = parseFloat(incomeInput.value) || 0;
+        const avgCheck = parseFloat(avgCheckInput.value) || 0;
+        const convRate = parseFloat(convRateInput.value) || 0;
 
-        // If any input is empty, reset results and stop
-        if (!incomeStr || !avgCheckStr || !convRateStr) {
+        // Status checks
+        const owner = getRadioValue('owner') === 'yes';
+        const crm = getRadioValue('crm') === 'yes';
+        const sales = getRadioValue('sales') === 'yes';
+        const smm = getRadioValue('smm') === 'yes';
+
+        // --- Core Calculation ---
+        if (income > 0 && avgCheck > 0 && convRate > 0) {
+            const clientsNeeded = income / avgCheck;
+            const leadsNeeded = clientsNeeded / (convRate / 100);
+
+            clientsNeedEl.textContent = Math.ceil(clientsNeeded).toLocaleString();
+            leadsNeedEl.textContent = Math.ceil(leadsNeeded).toLocaleString();
+
+            // Calculate Penalty
+            let penalty = 0;
+            let risks = [];
+            let recs = [];
+
+            if (!crm) {
+                penalty += 0.2;
+                risks.push("CRM yo'qligi sababli mijozlar yo'qolmoqda.");
+                recs.push({ text: "CRM Tizimini O'rnatish", type: "destructive" });
+            }
+            if (!sales) {
+                penalty += 0.2;
+                risks.push("Sotuv bo'limi yo'qligi konversiyani tushirmoqda.");
+                recs.push({ text: "Sotuv Menejeri Yollash", type: "destructive" });
+            }
+            if (!smm) {
+                penalty += 0.1;
+                risks.push("Ijtimoiy tarmoqlar faol emas.");
+                recs.push({ text: "SMM (Target) Yo'lga Qo'yish", type: "secondary" });
+            }
+
+            // Budget
+            const baseMin = leadsNeeded * CPL_MIN;
+            const baseOpt = leadsNeeded * CPL_MAX;
+            const finalMin = baseMin * (1 + penalty);
+            const finalOpt = baseOpt * (1 + penalty);
+
+            minBudgetEl.textContent = '$' + Math.ceil(finalMin).toLocaleString();
+            optBudgetEl.textContent = '$' + Math.ceil(finalOpt).toLocaleString();
+
+            // Render Recommendations
+            recs.push({ text: "Reklama Byudjetini Test Qilish ($100)", type: "outline" });
+            recommendationsList.innerHTML = recs.map(r =>
+                `<span class="badge badge-${r.type}">${r.text}</span>`
+            ).join('');
+
+            // Update Risk UI
+            updateRiskUI(penalty);
+
+            // Update Alert
+            if (penalty > 0) {
+                impactAlert.style.display = 'flex';
+                impactText.textContent = `Tizimdagi kamchiliklar sababli byudjetingiz ${Math.round(penalty * 100)}% ga oshib ketmoqda.`;
+            } else {
+                impactAlert.style.display = 'none';
+            }
+
+        } else {
+            // Reset if inputs incomplete
             clientsNeedEl.textContent = '---';
             leadsNeedEl.textContent = '---';
             minBudgetEl.textContent = '---';
             optBudgetEl.textContent = '---';
-            budgetPenaltyEl.textContent = 'KUTILMOQDA...';
-            warningListEl.innerHTML = '<li>⚠️ Ma\'lumotlarni kiriting...</li>';
-            document.querySelector('.impact-alert').style.display = 'none';
-            return;
+            riskLabel.textContent = "HISOBLANMOQDA";
+            riskCircle.style.strokeDasharray = "0, 100";
+            riskCircle.setAttribute('class', 'circle'); // reset colors
+            recommendationsList.innerHTML = '';
+            impactAlert.style.display = 'none';
         }
-
-        let income = parseFloat(incomeStr);
-        let avgCheck = parseFloat(avgCheckStr);
-        let convRate = parseFloat(convRateStr);
-
-        let hasCRM = crmYes.checked;
-        let hasSales = salesYes.checked;
-        let hasSMM = smmYes.checked;
-
-        // Core Calculation
-        if (income === 0 || avgCheck === 0 || convRate === 0) return;
-
-        let clientsNeeded = income / avgCheck;
-        // convRate is percent, so / 100
-        let leadsNeeded = clientsNeeded / (convRate / 100);
-
-        // Penalties
-        let penalty = 0;
-        let warnings = [];
-        let recommendations = [];
-
-        if (!hasCRM) {
-            penalty += 0.20;
-            warnings.push(`🔥 CRM yo'q - Mijozlar nazoratsiz qolmoqda (+20% Zarar)`);
-            recommendations.push(`CRM tizimi (AmoCRM/Bitrix24) o'rnating`);
-            iconCrm.textContent = '❌';
-        } else {
-            iconCrm.textContent = '✅';
-        }
-
-        if (!hasSales) {
-            penalty += 0.20;
-            warnings.push(`💀 Sotuvchisiz biznes - bu shunchaki xobbi (+20% Zarar)`);
-            recommendations.push(`Professional Sotuvchi yollang`);
-            iconSales.textContent = '❌';
-        } else {
-            iconSales.textContent = '✅';
-        }
-
-        if (!hasSMM) {
-            penalty += 0.10;
-            warnings.push(`📉 Ijtimoiy tarmoq o'lik - Ishonch yo'q (+10%)`);
-            recommendations.push(`Instagramni "Upakovka" qiling!`);
-            iconSmm.textContent = '❌';
-        } else {
-            iconSmm.textContent = '✅';
-        }
-
-        // Always add test budget recommendation
-        recommendations.push(`Reklamaga $100 tashlab test qiling`);
-
-        // Budget Calc
-        let baseMinBudget = leadsNeeded * CPL_MIN;
-        let baseOptBudget = leadsNeeded * CPL_MAX;
-
-        let finalMinBudget = baseMinBudget * (1 + penalty);
-        let finalOptBudget = baseOptBudget * (1 + penalty);
-
-        // Update UI
-        clientsNeedEl.textContent = Math.ceil(clientsNeeded);
-        leadsNeedEl.textContent = Math.ceil(leadsNeeded);
-
-        // Format Currency
-        const fmt = (num) => '$' + Math.ceil(num).toLocaleString();
-
-        minBudgetEl.textContent = fmt(finalMinBudget);
-        optBudgetEl.textContent = fmt(finalOptBudget);
-        budgetPenaltyEl.textContent = "SAMARASIZLIK: " + Math.round(penalty * 100) + '%';
-
-        // Update Warnings
-        if (warnings.length === 0) {
-            warningListEl.innerHTML = '<li>✅ BIZNESINGIZ MUKAMMAL! NAVBATDAGI BOSQICHGA O\'TING.</li>';
-            document.querySelector('.impact-alert').style.display = 'none';
-        } else {
-            warningListEl.innerHTML = warnings.map(w => `<li>${w}</li>`).join('');
-            document.querySelector('.impact-alert').style.display = 'block';
-            document.querySelector('.impact-alert').innerHTML = `DIQQAT! TIZIMSIZLIK SABAB <span style="color:#fff; font-weight:800;">${Math.round(penalty * 100)}%</span> PULINGIZ KUYMOQDA!`;
-        }
-
-        // Update Recommendations
-        recommendationsListEl.innerHTML = recommendations.map(r => `<div class="chip">${r}</div>`).join('');
-
-        // Update Risk visualization
-        updateRisk(penalty);
     }
 
-    function updateRisk(penalty) {
-        // Penalty 0 - 0.4
-        // 0 -> Low Risk (Green)
-        // 0.2 -> Medium Risk (Yellow)
-        // 0.4+ -> High Risk (Red)
-
-        riskChartEl.classList.remove('green', 'yellow', 'red');
-        let riskLabel = "";
-        let strokeDash = 0; // 0 to 100
+    function updateRiskUI(penalty) {
+        // 0 -> Green, 0.2 -> Yellow, >= 0.4 -> Red
+        let colorClass = 'green';
+        let label = 'XAVFSIZ';
+        let stroke = 100;
 
         if (penalty >= 0.4) {
-            riskChartEl.classList.add('red');
-            riskLabel = "KRITIK<br>HOLAT";
-            strokeDash = 85;
-        } else if (penalty >= 0.2) {
-            riskChartEl.classList.add('yellow');
-            riskLabel = "XAVFLI";
-            strokeDash = 55;
-        } else {
-            riskChartEl.classList.add('green');
-            riskLabel = "IDEAL";
-            strokeDash = 100; // Full circle
+            colorClass = 'red';
+            label = 'KRITIK';
+            stroke = 75;
+        } else if (penalty >= 0.1) {
+            colorClass = 'yellow';
+            label = 'O\'RTA';
+            stroke = 50;
         }
 
-        riskTextEl.innerHTML = riskLabel;
-        // Simple animation for the stroke
-        const circle = riskChartEl.querySelector('.circle');
-        circle.setAttribute('stroke-dasharray', `${strokeDash}, 100`);
+        riskCircle.setAttribute('class', `circle ${colorClass}`);
+        // Small timeout to trigger animation
+        setTimeout(() => {
+            riskCircle.style.strokeDasharray = `${stroke}, 100`;
+        }, 50);
+
+        riskLabel.innerHTML = `<span>${label}</span>`;
     }
 
-    // Attach Listeners
-    const inputs = [incomeInput, avgCheckInput, convRateInput];
-    const toggles = [crmYes, crmNo, salesYes, salesNo, smmYes, smmNo];
-
-    inputs.forEach(el => el.addEventListener('input', calculate));
-    toggles.forEach(el => el.addEventListener('change', calculate));
-
-    // Tilt Effect
-    const cards = document.querySelectorAll('.card');
-
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Set mouse position for glow effect
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-
-            // Tilt calc
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            // Normalize -1 to 1
-            const rotateX = ((y - centerY) / centerY) * -2; // Max 2deg
-            const rotateY = ((x - centerX) / centerX) * 2;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-        });
+    // Event Listeners
+    [incomeInput, avgCheckInput, convRateInput].forEach(inp => {
+        inp.addEventListener('input', calculate);
     });
 
-    // Initial run
+    radios.forEach(r => {
+        r.addEventListener('change', calculate);
+    });
+
+    // Run initially
     calculate();
 });
