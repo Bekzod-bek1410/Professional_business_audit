@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Biznes Audit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="page-container">
+
+        <header class="header">
+            <h1 class="header-title">Biznes Audit Pro</h1>
+            <p class="header-desc">Biznesingiz salomatligini tekshiring va potentsial o'sish nuqtalarini aniqlang.</p>
+        </header>
+
+        <main class="grid-layout">
+
+            <!-- Cards Section -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Biznes Holati</h3>
+                    <p class="card-desc">Joriy jarayonlar va resurslar auditi</p>
+                </div>
+                <div class="card-content space-y-4">
+
+                    <div class="form-item">
+                        <label class="label">Siz biznes egasimisiz?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="owner" value="yes" checked>
+                                <span>Ha</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="owner" value="no">
+                                <span>Yo'q</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label class="label">CRM tizimi mavjudmi?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="crm" id="crm-yes" value="yes">
+                                <span>Ha</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="crm" id="crm-no" value="no" checked>
+                                <span>Yo'q</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label class="label">Sotuv bo'limi (Menejer)?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="sales" id="sales-yes" value="yes">
+                                <span>Ha</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="sales" id="sales-no" value="no" checked>
+                                <span>Yo'q</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label class="label">Ijtimoiy Tarmoq (SMM)?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="smm" id="smm-yes" value="yes" checked>
+                                <span>Bor</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="smm" id="smm-no" value="no">
+                                <span>Yo'q</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Financial Goals -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Moliyaviy Maqsadlar</h3>
+                    <p class="card-desc">Daromad va konversiya rejalari</p>
+                </div>
+                <div class="card-content space-y-4">
+                    <div class="form-item">
+                        <label class="label" for="incomeGoal">Oylik Daromad Maqsadi ($)</label>
+                        <input type="number" id="incomeGoal" class="input" placeholder="Masalan: 10000">
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-item">
+                            <label class="label" for="avgCheck">O'rtacha Chek ($)</label>
+                            <input type="number" id="avgCheck" class="input" placeholder="60">
+                        </div>
+                        <div class="form-item">
+                            <label class="label" for="convRate">Konversiya (%)</label>
+                            <input type="number" id="convRate" class="input" placeholder="30">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Status -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Xavf Darajasi</h3>
+                </div>
+                <div class="card-content flex-center">
+                    <div class="risk-circle-wrapper">
+                        <svg class="circular-chart" viewBox="0 0 36 36">
+                            <path class="circle-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" stroke-dasharray="0, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="risk-label">
+                            <span id="riskLabel">HISOBLANMOQDA</span>
+                        </div>
+                    </div>
+                    <div class="status-list space-y-2 mt-4">
+                        <div class="status-item" id="status-crm">
+                            <i data-lucide="x-circle" class="icon-destructive"></i> CRM Tizimi
+                        </div>
+                        <div class="status-item" id="status-sales">
+                            <i data-lucide="x-circle" class="icon-destructive"></i> Sotuv Bo'limi
+                        </div>
+                        <div class="status-item" id="status-smm">
+                            <i data-lucide="check-circle" class="icon-success"></i> Ijtimoiy Tarmoq
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="card col-span-2">
+                <div class="card-header">
+                    <h3 class="card-title">Tahlil Natijalari</h3>
+                    <p class="card-desc">Sizning biznesingiz uchun marketing funneli</p>
+                </div>
+                <div class="card-content">
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-label">Kerakli Mijozlar</span>
+                            <span class="stat-value" id="clientsNeeded">---</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Kerakli Lidlar</span>
+                            <span class="stat-value text-primary" id="leadsNeeded">---</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">CPL (Lid Narxi)</span>
+                            <span class="stat-value">$0.8 - $1.5</span>
+                        </div>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div class="budget-grid">
+                        <div class="budget-item">
+                            <span class="budget-label">Minimal Byudjet</span>
+                            <span class="budget-value" id="minBudget">---</span>
+                        </div>
+                        <div class="budget-item highlight">
+                            <span class="budget-label">Optimal Byudjet</span>
+                            <span class="budget-value" id="optBudget">---</span>
+                        </div>
+                    </div>
+
+                    <div class="alert destructive mt-6" id="impactAlert" style="display: none;">
+                        <i data-lucide="alert-triangle" class="alert-icon"></i>
+                        <div class="alert-content">
+                            <h5 class="alert-title">Diqqat!</h5>
+                            <p class="alert-desc" id="impactText">Tizimsizlik sabab byudjetingiz samarasiz
+                                ishlatilmoqda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="card col-span-3">
+                <div class="card-header">
+                    <h3 class="card-title">Tavsiyalar</h3>
+                </div>
+                <div class="card-content">
+                    <div class="badge-list" id="recommendationsList">
+                        <!-- Badges will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
