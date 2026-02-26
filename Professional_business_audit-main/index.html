@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Biznesingiz salomatligini tahlil qiling, marketing funnelini hisoblang va o'sish strategiyasini yarating.">
+    <title>BiznesAudit Pro — Professional Tahlil Vositasi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Theme init — prevents flash of wrong theme -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+
+<body>
+
+    <!-- Top Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Asosiy navigatsiya">
+        <div class="navbar-inner">
+            <div class="navbar-brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+                <span class="brand-name">BiznesAudit <span class="brand-accent">Pro</span></span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-meta">
+                    <span class="meta-badge">v2.0</span>
+                    <span class="meta-dot" aria-hidden="true"></span>
+                    <span class="meta-text">Real-vaqt tahlil</span>
+                </div>
+                <!-- Dark Mode Toggle -->
+                <button id="themeToggle" class="theme-toggle" aria-label="Mavzuni almashtirish" title="Dark/Light mode"
+                    type="button">
+                    <!-- Sun icon (shown in dark mode) -->
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                    <!-- Moon icon (shown in light mode) -->
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+
+        <!-- Hero Section -->
+        <header class="hero-section" role="banner">
+            <div class="hero-eyebrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 3v18h18" />
+                    <path d="m19 9-5 5-4-4-3 3" />
+                </svg>
+                Professional Biznes Tahlili
+            </div>
+            <h1 class="hero-title">Biznesingizni <span class="title-highlight">klinik</span> darajada tahlil qiling</h1>
+            <p class="hero-desc">Joriy holatni baholang, marketing funnelini hisoblang va aniq raqamlarga asoslangan
+                strategiya yarating. Hech qanday taxmin yo'q — faqat ma'lumotlar.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">3</span>
+                    <span class="hero-stat-label">Tahlil bloki</span>
+                </div>
+                <div class="hero-stat-divider" aria-hidden="true"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">100%</span>
+                    <span class="hero-stat-label">Real-vaqt</span>
+                </div>
+                <div class="hero-stat-divider" aria-hidden="true"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">∞</span>
+                    <span class="hero-stat-label">Hisoblash</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content" role="main">
+
+            <!-- Input Section: Two columns -->
+            <div class="input-section">
+
+                <!-- Card 1: Biznes Holati -->
+                <section class="card" aria-labelledby="card-status-title">
+                    <div class="card-header">
+                        <div class="card-icon-wrap" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="14" x="2" y="5" rx="2" />
+                                <line x1="2" x2="22" y1="10" y2="10" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="card-title" id="card-status-title">Biznes Holati</h2>
+                            <p class="card-subtitle">Joriy jarayonlar va resurslar auditi</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="toggle-list">
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    <div>
+                                        <span class="toggle-label">Siz biznes egasisiz?</span>
+                                        <span class="toggle-hint">Qaror qabul qilish huquqi</span>
+                                    </div>
+                                </div>
+                                <div class="segmented-control" role="radiogroup" aria-label="Biznes egasi">
+                                    <label class="seg-option">
+                                        <input type="radio" name="owner" value="yes" checked>
+                                        <span>Ha</span>
+                                    </label>
+                                    <label class="seg-option">
+                                        <input type="radio" name="owner" value="no">
+                                        <span>Yo'q</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                        <path d="M3 9h18" />
+                                        <path d="M9 21V9" />
+                                    </svg>
+                                    <div>
+                                        <span class="toggle-label">CRM tizimi</span>
+                                        <span class="toggle-hint">Mijozlar boshqaruvi</span>
+                                    </div>
+                                </div>
+                                <div class="segmented-control" role="radiogroup" aria-label="CRM tizimi">
+                                    <label class="seg-option">
+                                        <input type="radio" name="crm" id="crm-yes" value="yes">
+                                        <span>Bor</span>
+                                    </label>
+                                    <label class="seg-option">
+                                        <input type="radio" name="crm" id="crm-no" value="no" checked>
+                                        <span>Yo'q</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg>
+                                    <div>
+                                        <span class="toggle-label">Sotuv bo'limi</span>
+                                        <span class="toggle-hint">Menejerlar jamoasi</span>
+                                    </div>
+                                </div>
+                                <div class="segmented-control" role="radiogroup" aria-label="Sotuv bo'limi">
+                                    <label class="seg-option">
+                                        <input type="radio" name="sales" id="sales-yes" value="yes">
+                                        <span>Bor</span>
+                                    </label>
+                                    <label class="seg-option">
+                                        <input type="radio" name="sales" id="sales-no" value="no" checked>
+                                        <span>Yo'q</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                                    </svg>
+                                    <div>
+                                        <span class="toggle-label">Ijtimoiy tarmoq (SMM)</span>
+                                        <span class="toggle-hint">Target reklama va kontent</span>
+                                    </div>
+                                </div>
+                                <div class="segmented-control" role="radiogroup" aria-label="Ijtimoiy tarmoq">
+                                    <label class="seg-option">
+                                        <input type="radio" name="smm" id="smm-yes" value="yes" checked>
+                                        <span>Bor</span>
+                                    </label>
+                                    <label class="seg-option">
+                                        <input type="radio" name="smm" id="smm-no" value="no">
+                                        <span>Yo'q</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Card 2: Moliyaviy Maqsadlar -->
+                <section class="card" aria-labelledby="card-finance-title">
+                    <div class="card-header">
+                        <div class="card-icon-wrap" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" x2="12" y1="2" y2="22" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="card-title" id="card-finance-title">Moliyaviy Maqsadlar</h2>
+                            <p class="card-subtitle">Daromad va konversiya rejalari</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="field-group">
+                            <label class="field-label" for="incomeGoal">
+                                Oylik Daromad Maqsadi
+                                <span class="field-unit">USD</span>
+                            </label>
+                            <div class="field-input-wrap">
+                                <span class="field-prefix" aria-hidden="true">$</span>
+                                <input type="number" id="incomeGoal" class="field-input" placeholder="10,000"
+                                    aria-label="Oylik daromad maqsadi dollar hisobida" min="0">
+                            </div>
+                        </div>
+
+                        <div class="fields-row">
+                            <div class="field-group">
+                                <label class="field-label" for="avgCheck">
+                                    O'rtacha Chek
+                                    <span class="field-unit">USD</span>
+                                </label>
+                                <div class="field-input-wrap">
+                                    <span class="field-prefix" aria-hidden="true">$</span>
+                                    <input type="number" id="avgCheck" class="field-input" placeholder="60"
+                                        aria-label="O'rtacha chek miqdori dollar hisobida" min="0">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label" for="convRate">
+                                    Konversiya
+                                    <span class="field-unit">%</span>
+                                </label>
+                                <div class="field-input-wrap">
+                                    <input type="number" id="convRate" class="field-input field-input--no-prefix"
+                                        placeholder="30" aria-label="Konversiya foizi" min="0" max="100">
+                                    <span class="field-suffix" aria-hidden="true">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CPL Info -->
+                        <div class="info-block">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 16v-4" />
+                                <path d="M12 8h.01" />
+                            </svg>
+                            <span>Bozor o'rtachasi: CPL <strong>$0.8 — $1.5</strong> oralig'ida</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Risk Score Card (Full Width) -->
+            <section class="card card--risk" aria-labelledby="card-risk-title">
+                <div class="risk-layout">
+                    <div class="risk-left">
+                        <div class="card-header card-header--inline">
+                            <div class="card-icon-wrap card-icon-wrap--sm" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                                    <path d="M12 9v4" />
+                                    <path d="M12 17h.01" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="card-title" id="card-risk-title">Xavf Darajasi</h2>
+                                <p class="card-subtitle">Tizim tahlili</p>
+                            </div>
+                        </div>
+
+                        <!-- Donut Chart -->
+                        <div class="donut-wrap" role="img" aria-labelledby="risk-aria-label">
+                            <svg class="donut-svg" viewBox="0 0 120 120">
+                                <circle class="donut-track" cx="60" cy="60" r="46" />
+                                <circle class="donut-ring" id="donutRing" cx="60" cy="60" r="46" />
+                            </svg>
+                            <div class="donut-center">
+                                <span class="donut-percent" id="riskPercent">—</span>
+                                <span class="donut-label" id="riskLabel" aria-live="polite">TAHLIL</span>
+                            </div>
+                        </div>
+                        <span id="risk-aria-label" class="sr-only">Xavf darajasi ko'rsatkichi</span>
+                    </div>
+
+                    <div class="risk-right">
+                        <h3 class="risk-status-title">Tizim holati</h3>
+                        <div class="status-list" role="list">
+                            <div class="status-row" id="status-crm" role="listitem">
+                                <div class="status-indicator status-indicator--bad" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" x2="6" y1="6" y2="18" />
+                                        <line x1="6" x2="18" y1="6" y2="18" />
+                                    </svg>
+                                </div>
+                                <div class="status-text">
+                                    <span class="status-name">CRM Tizimi</span>
+                                    <span class="status-desc">Mijozlar yo'qolish ehtimoli</span>
+                                </div>
+                            </div>
+                            <div class="status-row" id="status-sales" role="listitem">
+                                <div class="status-indicator status-indicator--bad" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" x2="6" y1="6" y2="18" />
+                                        <line x1="6" x2="18" y1="6" y2="18" />
+                                    </svg>
+                                </div>
+                                <div class="status-text">
+                                    <span class="status-name">Sotuv Bo'limi</span>
+                                    <span class="status-desc">Konversiya past qoladi</span>
+                                </div>
+                            </div>
+                            <div class="status-row" id="status-smm" role="listitem">
+                                <div class="status-indicator status-indicator--good" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </div>
+                                <div class="status-text">
+                                    <span class="status-name">Ijtimoiy Tarmoq</span>
+                                    <span class="status-desc">Aktiv va ishlayapti</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Grid (Full Width) -->
+            <section class="card" aria-labelledby="card-results-title">
+                <div class="card-header">
+                    <div class="card-icon-wrap" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="m19 9-5 5-4-4-3 3" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="card-title" id="card-results-title">Tahlil Natijalari</h2>
+                        <p class="card-subtitle">Sizning biznesingiz uchun marketing funneli</p>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- KPI Row -->
+                    <div class="kpi-row">
+                        <div class="kpi-card">
+                            <div class="kpi-icon kpi-icon--blue" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Kerakli Mijozlar</span>
+                                <span class="kpi-value" id="clientsNeeded">—</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon kpi-icon--indigo" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Kerakli Lidlar</span>
+                                <span class="kpi-value kpi-value--accent" id="leadsNeeded">—</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon kpi-icon--emerald" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+                                    <path d="M12 18V6" />
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">CPL (Lid Narxi)</span>
+                                <span class="kpi-value">$0.8–1.5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Separator -->
+                    <div class="section-divider" aria-hidden="true">
+                        <span>Byudjet hisob-kitobi</span>
+                    </div>
+
+                    <!-- Budget Row -->
+                    <div class="budget-row">
+                        <div class="budget-card">
+                            <div class="budget-card-label">
+                                <div class="budget-dot budget-dot--neutral" aria-hidden="true"></div>
+                                Minimal Byudjet
+                            </div>
+                            <div class="budget-card-value" id="minBudget">—</div>
+                            <div class="budget-card-sub">Asosiy kanal</div>
+                        </div>
+                        <div class="budget-card budget-card--featured">
+                            <div class="budget-featured-badge">Tavsiya etilgan</div>
+                            <div class="budget-card-label">
+                                <div class="budget-dot budget-dot--accent" aria-hidden="true"></div>
+                                Optimal Byudjet
+                            </div>
+                            <div class="budget-card-value budget-card-value--accent" id="optBudget">—</div>
+                            <div class="budget-card-sub">To'liq funnel</div>
+                        </div>
+                    </div>
+
+                    <!-- Alert -->
+                    <div class="alert-panel" id="impactAlert" role="alert" aria-live="assertive" style="display: none;">
+                        <div class="alert-icon-wrap" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                                <path d="M12 9v4" />
+                                <path d="M12 17h.01" />
+                            </svg>
+                        </div>
+                        <div class="alert-body">
+                            <strong class="alert-headline">Diqqat! Byudjet samaradorligi past</strong>
+                            <p class="alert-text" id="impactText">Tizimsizlik sabab byudjetingiz samarasiz
+                                ishlatilmoqda.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Recommendations (Full Width) -->
+            <section class="card" aria-labelledby="card-recs-title">
+                <div class="card-header">
+                    <div class="card-icon-wrap" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11l3 3L22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="card-title" id="card-recs-title">Tavsiyalar</h2>
+                        <p class="card-subtitle">Keyingi qadamlar va ustuvorliklar</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="recs-list" id="recommendationsList" role="list" aria-live="polite">
+                        <div class="recs-empty">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 16v-4" />
+                                <path d="M12 8h.01" />
+                            </svg>
+                            <p>Ma'lumotlarni kiriting — tavsiyalar avtomatik ko'rinadi</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="page-footer" role="contentinfo">
+            <p>BiznesAudit Pro &mdash; UI/UX Pro Max skill asosida qurilgan &bull; 2026</p>
+        </footer>
+
+    </div>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>
